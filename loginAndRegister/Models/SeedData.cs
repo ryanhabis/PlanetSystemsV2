@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using starSystems.Data;
+using starSystemV2.Models;
 using System;
 using System.Linq;
 
@@ -165,6 +167,30 @@ namespace starSystems.Models
 
                    }
                 );
+
+                // Look for any Planets.
+                if (context.Products.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.Products.AddRange(
+               new Product
+               {
+              ProductId = 1,
+              Name = "Moon Rock",
+              Price = 100,
+              Description = "Igneous Moon Rock",
+              ImageUrl = "https://bpb-us-w2.wpmucdn.com/sites.wustl.edu/dist/0/2226/files/2019/11/QUE94281_N.jpg"
+            }, 
+            new Product
+            {
+              ProductId = 2,
+              Name = "Space Dust",
+              Price = 1,
+              Description = "Dust from Outer Space",
+              ImageUrl = "https://files.ekmcdn.com/ce6376/images/popping-candy-space-dust-strawberry-or-cola-1558-1-p.jpg?w=630&h=9999&v=C6BDFD28-6054-4999-854B-B5DEEE7C1290?v=C6BDFD28-6054-4999-854B-B5DEEE7C1290"
+            }
+          );
 
 
 
