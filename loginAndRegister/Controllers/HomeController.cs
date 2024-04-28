@@ -1,6 +1,7 @@
 using loginAndRegister.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using starSystemV2.Data;
 using System.Diagnostics;
 
 namespace loginAndRegister.Controllers
@@ -8,15 +9,18 @@ namespace loginAndRegister.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly NasaApodAPIService _nasaApodAPIService;
+        
+        public HomeController(ILogger<HomeController> logger,NasaApodAPIService nasaApodAPIService)
         {
             _logger = logger;
+            _nasaApodAPIService = nasaApodAPIService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var apod= await _nasaApodAPIService.GetApodAsync(); 
+            return View(apod);
         }
         [Authorize]
         public IActionResult Privacy()

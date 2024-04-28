@@ -2,6 +2,7 @@ using loginAndRegister.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using starSystems.Data;
+using starSystemV2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,11 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
     googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
     googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
 });
+
+builder.Services.AddHttpClient<NasaApodAPIService>(client =>
+{
+    client.BaseAddress = new Uri("http://api.nasa.gov");
+}) ;
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
