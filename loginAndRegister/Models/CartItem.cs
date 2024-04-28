@@ -8,7 +8,7 @@
 
         public int Quantity { get; set; }
 
-public int ShoppingCartId { get; set; }
+        public int ShoppingCartId { get; set; }
         public ShoppingCart ShoppingCart { get; set; }
     }
 }

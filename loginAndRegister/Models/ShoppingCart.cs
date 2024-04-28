@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+using System.ComponentModel.DataAnnotations;
+
 namespace starSystemV2.Models
 {
     public class ShoppingCart
@@ -10,33 +12,35 @@ namespace starSystemV2.Models
         public string UserId { get; set; }
 
         // Dictionary to store items, which is keyed by the productid
-        public Dictionary<int, CartItem> Items { get; set; } = new Dictionary<int, CartItem>();
+        public List<CartItem> Items { get; set; } = new List<CartItem>();
 
         public void AddItem(Product product,int quantity)
         {
-            if(Items.TryGetValue(product.ProductId,out CartItem existingItem))
+            var existingItem = Items.FirstOrDefault(item => item.ProductId == product.ProductId);
+            if(existingItem!=null)
             {
                 existingItem.Quantity += quantity;
             }
             else
             {
-                Items[product.ProductId] = new CartItem { Product = product, Quantity = quantity };
+                Items.Add(new CartItem() { ProductId = product.ProductId,Quantity = quantity});
             }
         }
         public void RemoveItem(int productId)
         {
-            if (Items.ContainsKey(productId))
+            var removedItem = Items.FirstOrDefault(item => item.ProductId == productId);
+            if (removedItem!=null)
             {
-                Items.Remove(productId);
+                Items.Remove(removedItem);
             }
         }
 
         public void updateQuantity(int productId, int newQuantity)
         {
-            if (Items.TryGetValue(productId,out CartItem item))
-            {
-                if (newQuantity>0)
+            var item = Items.FirstOrDefault(item => item.ProductId == productId);
+                if (item!=null)
                 {
+                if (newQuantity > 0) { 
                     item.Quantity = newQuantity;
                 }
                 else
