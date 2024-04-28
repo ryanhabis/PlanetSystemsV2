@@ -22,7 +22,7 @@ namespace loginAndRegister.Controllers
             var apod= await _nasaApodAPIService.GetApodAsync(); 
             return View(apod);
         }
-        [Authorize]
+
         public IActionResult Privacy()
         {
             return View();

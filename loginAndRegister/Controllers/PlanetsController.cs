@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,7 @@ namespace starSystems.Controllers
             _context = context;
         }
 
+        [Authorize]
         // GET: planet
         public async Task<IActionResult> Index(string planetStarSystem, string searchString)
         {
@@ -58,7 +60,7 @@ namespace starSystems.Controllers
         //{
         //    return View(await _context.planet.ToListAsync());
         //}
-
+        [Authorize]
         // GET: planet/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -77,6 +79,7 @@ namespace starSystems.Controllers
             return View(planets);
         }
 
+        [Authorize]
         // GET: planet/Create
         public IActionResult Create()
         {
@@ -99,6 +102,7 @@ namespace starSystems.Controllers
             return View(planets);
         }
 
+        [Authorize]
         // GET: planet/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -118,6 +122,7 @@ namespace starSystems.Controllers
         // POST: planet/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,StarId,StarSystem")] Planets planets)
@@ -150,6 +155,7 @@ namespace starSystems.Controllers
             return View(planets);
         }
 
+        [Authorize]
         // GET: planet/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -169,6 +175,7 @@ namespace starSystems.Controllers
         }
 
         // POST: planet/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
