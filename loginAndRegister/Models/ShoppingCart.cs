@@ -31,5 +31,20 @@ namespace starSystemV2.Models
             }
         }
 
+        public void updateQuantity(int productId, int newQuantity)
+        {
+            if (Items.TryGetValue(productId,out CartItem item))
+            {
+                if (newQuantity>0)
+                {
+                    item.Quantity = newQuantity;
+                }
+                else
+                {
+                    RemoveItem(productId);
+                }
+            }
+        }
+
     }
 }

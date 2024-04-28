@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using starSystems.Models;
+using starSystemV2.Models;
 
 namespace starSystems.Data
 {
@@ -15,5 +16,9 @@ namespace starSystems.Data
         }
         public DbSet<starSystems.Models.StarSystems> Stars { get; set; }
         public DbSet<starSystems.Models.Planets> Planets { get; set; } = default!;
+
+        public DbSet<Product> Products { get; set; } = default!;
+       // public DbSet<CartItem> CartItem { get; set; } = default!;
+       // public DbSet<ShoppingCart> ShoppingCart { get; set; } = default!;
     }
 }
