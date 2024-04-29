@@ -169,7 +169,7 @@ namespace starSystems.Models
                 );
 
                 // Look for any Planets.
-                if (context.Products.Any())
+                if (!context.Products.Any())
                 {
                     return;   // DB has been seeded
                 }
